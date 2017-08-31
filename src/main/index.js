@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 
 let mainWindow
 
@@ -11,10 +11,22 @@ app.on('ready', () => {
     height: 800
   })
 
-  mainWindow.webContents.on('dom-ready', () => {
-    // The window has loaded its contents
-    mainWindow.show()
-  })
-
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)
+
+  const buttons = ['Yes', 'No']
+  const options = {
+    type: 'question',
+    buttons,
+    title: 'Show window?',
+    message: 'Do you want to show the window?',
+    detail: 'Choose carefully!'
+  }
+
+  dialog.showMessageBox(options, (response) => {
+    const selected = buttons[response]
+
+    if (selected === 'Yes') {
+      mainWindow.show()
+    }
+  })
 })
