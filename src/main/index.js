@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 let mainWindow
 
@@ -14,7 +14,12 @@ app.on('ready', () => {
   mainWindow.webContents.on('dom-ready', () => {
     // The window has loaded its contents
     mainWindow.show()
+    mainWindow.webContents.send('ping-pong', { ping: true })
   })
 
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)
+
+  ipcMain.on('ping-pong', (event, data) => {
+    console.log('Pong received:', data)
+  })
 })
