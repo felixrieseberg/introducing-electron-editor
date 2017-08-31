@@ -43,6 +43,33 @@ function askForFileContents() {
   })
 }
 
+/**
+ * Saves the contents of the editor to a file
+ *
+ * @param {Monaco.editor} editor
+ * @returns Promise<void>
+ */
+function saveFileContents(editor) {
+  return new Promise((resolve) => {
+    const model = editor.getModel()
+    const options = {
+      defaultPath: openFilePath
+    }
+
+    let data = '';
+
+    model._lines.forEach((line) => {
+      data += line.text + model._EOL;
+    });
+
+    dialog.showSaveDialog(options, (filePath) => {
+      if (filePath) {
+        fs.writeFileSync(filePath, data, 'utf-8')
+      }
+    })
+  })
+}
+
 loadMonaco().then(async (monaco) => {
   // Ask the user if a file should be opened
   const value = await askForFileContents()
@@ -56,4 +83,15 @@ loadMonaco().then(async (monaco) => {
   }
 
   const editor = monaco.editor.create(element, options)
+
+  // Add a "save action" to the context menu
+  editor.addAction({
+    id: 'save-file',
+    label: 'Save file...',
+    contextMenuGroupId: 'navigation',
+    contextMenuOrder: 1,
+    precondition: null,
+    keybindingContext: null,
+    run: (editor) => saveFileContents(editor)
+  })
 })
