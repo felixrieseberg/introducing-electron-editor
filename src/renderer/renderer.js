@@ -1,13 +1,15 @@
+const { ipcRenderer } = require('electron')
 const loadMonaco = require('monaco-loader')
 
-function sendNotification (editor) {
-  const notification = new window.Notification('Hello!', {
-    body: 'Hello from your notification system'
+function sendNotificationFromMain (editor) {
+  // We're telling the main process to send the notification
+  ipcRenderer.send('send-notification', {
+    body: 'Hello from the main process!'
   })
 
-  notification.onclick = () => {
+  ipcRenderer.once('clicked-notification', () => {
     editor.setValue('Notification clicked!')
-  }
+  })
 }
 
 loadMonaco().then((monaco) => {
@@ -28,6 +30,6 @@ loadMonaco().then((monaco) => {
     contextMenuOrder: 1,
     precondition: null,
     keybindingContext: null,
-    run: (editor) => sendNotification(editor)
+    run: (editor) => sendNotificationFromMain(editor)
   })
 })

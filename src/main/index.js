@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain, Notification } = require('electron')
 
 let mainWindow
 
@@ -17,4 +17,14 @@ app.on('ready', () => {
   })
 
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)
+
+  ipcMain.on('send-notification', (event, options) => {
+    const notification = new Notification(options)
+
+    notification.on('click', () => {
+      mainWindow.send('clicked-notification')
+    })
+
+    notification.show()
+  })
 })
