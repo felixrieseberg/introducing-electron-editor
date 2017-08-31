@@ -1,1 +1,5 @@
-console.log('Hello World!')
+const { app } = require('electron')
+
+app.on('ready', () => {
+  console.log('Application ready!')
+})
