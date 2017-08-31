@@ -1,0 +1,12 @@
+{
+  "name": "introducing-electron-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "Felix Rieseberg <felix@felixrieseberg.com>",
+  "license": "ISC"
+}
