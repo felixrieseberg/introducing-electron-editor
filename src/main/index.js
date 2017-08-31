@@ -8,7 +8,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 800,
-    backgroundColor: '#1e1e1e'
+    show: false
   })
 
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)

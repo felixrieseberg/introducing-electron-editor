@@ -1,3 +1,4 @@
+const { remote } = require('electron')
 const loadMonaco = require('monaco-loader')
 
 loadMonaco().then((monaco) => {
@@ -9,4 +10,7 @@ loadMonaco().then((monaco) => {
   }
 
   const editor = monaco.editor.create(element, options)
+
+  // The editor is live, let's show the window
+  remote.getCurrentWindow().show()
 })
