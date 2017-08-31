@@ -6,6 +6,10 @@
   </head>
   <body>
     <div id="container"></div>
-    <script>require('./renderer.js')</script>
+    <script>
+      // This API was previously defined during the
+      // preload-phase in ./preload.js.
+      window.loadEditor()
+    </script>
   </body>
 </html>

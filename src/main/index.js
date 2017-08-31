@@ -8,7 +8,11 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1000,
-    height: 800
+    height: 800,
+    webPreferences: {
+      preload: require.resolve('../renderer/preload.js'),
+      nodeIntegration: false
+    }
   })
 
   mainWindow.webContents.on('dom-ready', () => {
