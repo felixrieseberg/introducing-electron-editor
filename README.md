@@ -1,6 +1,8 @@
 # "Introducing Electron" (The editor)
 In this repository, you will find each step and code example from the guide "Introducing Electron". It includes both the "Hello World" exercise (a simple code editor) as well as example implementations for each feature discussed in the "Working with Electron" section.
 
+![](.github/editor.png)
+
 ### Exercise
  - [Initial 'Hello World' (Node)](https://github.com/felixrieseberg/introducing-electron-editor/commit/1766093d0e3bf3aebb240fafee0e300bcfc951e0)
  - [Initial 'Hello World' (Electron)](https://github.com/felixrieseberg/introducing-electron-editor/commit/30b8ebb6a46dd129fe83adac259eff0711946a24)
