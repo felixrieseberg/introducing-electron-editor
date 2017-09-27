@@ -7,5 +7,11 @@ app.on('ready', () => {
 
   //`file://` + __dirname + '/index.html'
   mainWindow.loadURL(`file://${__dirname}/index.html`)
+
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    event.preventDefault()
+
+    mainWindow.webContents.send('open-file', url)
+  })
 })
 
