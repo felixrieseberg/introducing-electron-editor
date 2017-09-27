@@ -54,7 +54,8 @@ loader().then((monaco) => {
     }, (response) => {
       if (response === 0 && !filePath) {
         dialog.showSaveDialog(browserWindow, {}, (userPath) => {
-          saveFile(userPath)
+          filePath = userPath
+          saveFile(filePath)
         })
       } else if (response === 0) {
         saveFile(filePath)
