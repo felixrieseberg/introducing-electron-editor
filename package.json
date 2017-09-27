@@ -1,0 +1,23 @@
+{
+  "name": "introducing-electron-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixrieseberg/introducing-electron-editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixrieseberg/introducing-electron-editor/issues"
+  },
+  "homepage": "https://github.com/felixrieseberg/introducing-electron-editor#readme",
+  "dependencies": {
+    "electron": "^1.7.8"
+  }
+}
