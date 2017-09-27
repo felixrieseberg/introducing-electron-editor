@@ -14,9 +14,6 @@ loader().then((monaco) => {
   })
 
   ipcRenderer.on('open-file', (sender, url = '') => {
-    // file:///Users/felixr/... to /Users/felixr/...
-    const slices = process.platform === 'win32' ? 8 : 7
-    url = url.slice(slices)
     console.log(url)
     filePath = url
 
