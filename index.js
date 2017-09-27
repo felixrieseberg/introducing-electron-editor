@@ -8,3 +8,4 @@ app.on('ready', () => {
   //`file://` + __dirname + '/index.html'
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 })
+
