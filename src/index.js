@@ -3,10 +3,17 @@ const { app, BrowserWindow, Menu, dialog } = require('electron')
 let mainWindow
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow()
+  mainWindow = new BrowserWindow({
+    show: false,
+    backgroundColor: '#1e1e1e'
+  })
 
   //`file://` + __dirname + '/index.html'
   mainWindow.loadURL(`file://${__dirname}/index.html`)
+
+  mainWindow.webContents.on('dom-ready', () => {
+    mainWindow.show()
+  })
 
   mainWindow.webContents.on('will-navigate', (event, url) => {
     event.preventDefault()
