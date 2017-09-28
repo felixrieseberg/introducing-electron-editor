@@ -38,14 +38,17 @@
           "squirrel"
         ],
         "darwin": [
-          "zip"
+          "zip",
+          "dmg"
         ],
         "linux": [
           "deb",
           "rpm"
         ]
       },
-      "electronPackagerConfig": {},
+      "electronPackagerConfig": {
+        "icon": "./resources/icon/icon"
+      },
       "electronWinstallerConfig": {
         "name": ""
       },
