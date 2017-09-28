@@ -1,7 +1,7 @@
 {
   "name": "introducing-electron-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "A little editor",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/felixrieseberg/introducing-electron-editor.git"
   },
-  "author": "",
+  "author": "Felix Rieseberg <felix@felix.fun>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/felixrieseberg/introducing-electron-editor/issues"
@@ -47,10 +47,11 @@
         ]
       },
       "electronPackagerConfig": {
-        "icon": "./resources/icon/icon"
+        "icon": "./resources/icon/icon",
+        "ignore": "./out"
       },
       "electronWinstallerConfig": {
-        "name": ""
+        "name": "Editor"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
