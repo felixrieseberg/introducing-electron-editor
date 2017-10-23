@@ -34,6 +34,8 @@ async function openFile(filePath) {
 async function saveFile(url) {
   url = url || currentUrl
 
+  if (!url) return saveFileAs()
+
   const model = editor.getModel()
   let data = ''
 
@@ -51,11 +53,19 @@ async function saveFile(url) {
 async function saveFileAs() {
   remote.dialog.showSaveDialog(rendererWindow, {
     defaultPath: __dirname
-  }, (url) => saveFile(url))
+  }, (url) => {
+    if (url) {
+      saveFile(url)
+    }
+  })
 }
 
 async function newFile() {
   console.log('New file!')
+
+  const model = monaco.editor.createModel('', 'javascript')
+  editor.setModel(model)
+  currentUrl = null
 }
 
 loader().then((_monaco) => {
@@ -72,6 +82,6 @@ loader().then((_monaco) => {
 
   ipcRenderer.on('open-file', (_e, url) => openFile(url))
   ipcRenderer.on('new-file', newFile)
-  ipcRenderer.on('save-file', saveFile)
+  ipcRenderer.on('save-file', () => saveFile())
   ipcRenderer.on('save-file-as', saveFileAs)
  })
