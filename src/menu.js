@@ -1,4 +1,4 @@
-const { Menu, app, BrowserWindow } = require('electron')
+const { Menu, app, BrowserWindow, dialog } = require('electron')
 
 function createMenu() {
   const template = [
@@ -7,6 +7,7 @@ function createMenu() {
       submenu: [
         {
           label: 'Quit',
+          accelerator: 'CmdOrCtrl+Q',
           click() {
             app.quit()
           }
@@ -14,7 +15,21 @@ function createMenu() {
       ]
     },
     {
-      label: 'File'
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          accelerator: 'CmdOrCtrl+O',
+          click() {
+            const mainWindow = BrowserWindow.getFocusedWindow()
+            dialog.showOpenDialog(mainWindow, (urls) => {
+              if (urls.length > 0) {
+                mainWindow.webContents.send('open-file', urls[0])
+              }
+            })
+          }
+        }
+      ]
     },
     { role: 'editMenu' },
     { role: 'windowMenu' },
