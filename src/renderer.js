@@ -7,6 +7,7 @@ const loader = require('monaco-loader')
 const rendererWindow = remote.getCurrentWindow()
 let monaco = null
 let editor = null
+let currentUrl = null
 
 async function openFile(filePath) {
   const extension = path.extname(filePath)
@@ -15,6 +16,8 @@ async function openFile(filePath) {
     '.css': 'css'
   }
   const filetype = filetypes[extension] || 'text'
+
+  currentUrl = filePath
 
   if (monaco && editor) {
     try {
@@ -28,27 +31,27 @@ async function openFile(filePath) {
   }
 }
 
-async function saveFile() {
-  console.log('Save file!')
+async function saveFile(url) {
+  url = url || currentUrl
+
+  const model = editor.getModel()
+  let data = ''
+
+  model._lines.forEach((line) => {
+    data += line.text + os.EOL
+  })
+
+  try {
+    fs.writeFileSync(url, data, 'utf-8')
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 async function saveFileAs() {
   remote.dialog.showSaveDialog(rendererWindow, {
     defaultPath: __dirname
-  }, (url) => {
-    const model = editor.getModel()
-    let data = ''
-
-    model._lines.forEach((line) => {
-      data += line.text + os.EOL
-    })
-
-    try {
-      fs.writeFileSync(url, data, 'utf-8')
-    } catch (error) {
-      console.log(error)
-    }
-  })
+  }, (url) => saveFile(url))
 }
 
 async function newFile() {
