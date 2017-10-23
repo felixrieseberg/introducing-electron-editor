@@ -9,6 +9,9 @@ app.on('ready', () => {
 
   const appUrl = path.join(__dirname, 'index.html')
 
-  mainWindow = new BrowserWindow()
+  mainWindow = new BrowserWindow({
+    acceptFirstMouse: true,
+    show: false
+  })
   mainWindow.loadURL(`file://${appUrl}`)
 })

@@ -1,4 +1,7 @@
+const { remote } = require('electron')
 const loader = require('monaco-loader')
+
+const rendererWindow = remote.getCurrentWindow()
 
 loader().then((monaco) => {
   const div = document.querySelector('#container')
@@ -7,4 +10,6 @@ loader().then((monaco) => {
     theme: 'vs-dark',
     automaticLayout: true
   })
+
+  rendererWindow.show()
 })
