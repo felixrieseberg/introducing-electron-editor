@@ -22,8 +22,10 @@ function createMenu() {
           accelerator: 'CmdOrCtrl+O',
           click() {
             const mainWindow = BrowserWindow.getFocusedWindow()
-            dialog.showOpenDialog(mainWindow, (urls) => {
-              if (urls.length > 0) {
+            dialog.showOpenDialog(mainWindow, {
+              defaultPath: __dirname
+            }, (urls) => {
+              if (urls && urls.length > 0) {
                 mainWindow.webContents.send('open-file', urls[0])
               }
             })
