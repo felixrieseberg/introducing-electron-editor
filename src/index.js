@@ -13,5 +13,15 @@ app.on('ready', () => {
     acceptFirstMouse: true,
     show: false
   })
+
   mainWindow.loadURL(`file://${appUrl}`)
+
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    event.preventDefault()
+
+    url = url.slice(process.platform === 'win32' ? 8 : 7)
+    mainWindow.webContents.send('open-file', url)
+
+    return false
+  })
 })

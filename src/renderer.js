@@ -1,4 +1,4 @@
-const { remote } = require('electron')
+const { remote, ipcRenderer } = require('electron')
 const loader = require('monaco-loader')
 
 const rendererWindow = remote.getCurrentWindow()
@@ -12,4 +12,8 @@ loader().then((monaco) => {
   })
 
   rendererWindow.show()
-})
+
+  ipcRenderer.on('open-file', (event, url) => {
+    console.log(url)
+  })
+ })
