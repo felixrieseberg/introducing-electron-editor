@@ -1,6 +1,7 @@
 // const app = require('electron').app
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const { createMenu } = require('./menu.js')
 
 let mainWindow
 
@@ -15,7 +16,6 @@ app.on('ready', () => {
   })
 
   mainWindow.loadURL(`file://${appUrl}`)
-
   mainWindow.webContents.on('will-navigate', (event, url) => {
     event.preventDefault()
 
@@ -24,4 +24,6 @@ app.on('ready', () => {
 
     return false
   })
+
+  createMenu()
 })
