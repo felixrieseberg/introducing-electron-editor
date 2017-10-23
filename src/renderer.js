@@ -1,4 +1,5 @@
 const fs = require('fs')
+const os = require('os')
 const path = require('path')
 const { remote, ipcRenderer } = require('electron')
 const loader = require('monaco-loader')
@@ -27,6 +28,33 @@ async function openFile(filePath) {
   }
 }
 
+async function saveFile() {
+  console.log('Save file!')
+}
+
+async function saveFileAs() {
+  remote.dialog.showSaveDialog(rendererWindow, {
+    defaultPath: __dirname
+  }, (url) => {
+    const model = editor.getModel()
+    let data = ''
+
+    model._lines.forEach((line) => {
+      data += line.text + os.EOL
+    })
+
+    try {
+      fs.writeFileSync(url, data, 'utf-8')
+    } catch (error) {
+      console.log(error)
+    }
+  })
+}
+
+async function newFile() {
+  console.log('New file!')
+}
+
 loader().then((_monaco) => {
   const div = document.querySelector('#container')
 
@@ -40,4 +68,7 @@ loader().then((_monaco) => {
   rendererWindow.show()
 
   ipcRenderer.on('open-file', (_e, url) => openFile(url))
+  ipcRenderer.on('new-file', newFile)
+  ipcRenderer.on('save-file', saveFile)
+  ipcRenderer.on('save-file-as', saveFileAs)
  })

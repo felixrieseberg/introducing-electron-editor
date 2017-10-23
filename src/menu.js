@@ -18,7 +18,15 @@ function createMenu() {
       label: 'File',
       submenu: [
         {
-          label: 'Open',
+          label: 'New File',
+          accelerator: 'CmdOrCtrl+N',
+          click() {
+            const mainWindow = BrowserWindow.getFocusedWindow()
+            mainWindow.webContents.send('new-file')
+          }
+        },
+        {
+          label: 'Open File',
           accelerator: 'CmdOrCtrl+O',
           click() {
             const mainWindow = BrowserWindow.getFocusedWindow()
@@ -29,6 +37,22 @@ function createMenu() {
                 mainWindow.webContents.send('open-file', urls[0])
               }
             })
+          }
+        },
+        {
+          label: 'Save File',
+          accelerator: 'CmdOrCtrl+S',
+          click() {
+            const mainWindow = BrowserWindow.getFocusedWindow()
+            mainWindow.webContents.send('save-file')
+          }
+        },
+        {
+          label: 'Save File as...',
+          accelerator: 'CmdOrCtrl+Shift+S',
+          click() {
+            const mainWindow = BrowserWindow.getFocusedWindow()
+            mainWindow.webContents.send('save-file-as')
           }
         }
       ]
