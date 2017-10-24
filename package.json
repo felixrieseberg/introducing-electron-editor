@@ -33,40 +33,6 @@
   },
   "homepage": "https://github.com/felixrieseberg/introducing-electron-editor#readme",
   "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "name": "Editor",
-        "icon": "./resources/icon",
-        "osxSign": {
-          "identity": "A123567"
-        }
-      },
-      "electronWinstallerConfig": {
-        "name": "Editor",
-        "certificateFile": "/path/to/your/certificate.pfx",
-        "certificatePassword": "your-cool-password"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "",
-        "name": ""
-      },
-      "windowsStoreConfig": {
-        "packageName": ""
-      }
-    }
+    "forge": "./forge.config.js"
   }
 }
