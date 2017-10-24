@@ -54,6 +54,14 @@ function createMenu() {
             const mainWindow = BrowserWindow.getFocusedWindow()
             mainWindow.webContents.send('save-file-as')
           }
+        },
+        {
+          label: 'Print',
+          accelerator: 'CmdOrCtrl+P',
+          click() {
+            const mainWindow = BrowserWindow.getFocusedWindow()
+            mainWindow.webContents.send('print')
+          }
         }
       ]
     },

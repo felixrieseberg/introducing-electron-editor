@@ -68,6 +68,10 @@ async function newFile() {
   currentUrl = null
 }
 
+function print() {
+  rendererWindow.webContents.print()
+}
+
 loader().then((_monaco) => {
   const div = document.querySelector('#container')
 
@@ -84,4 +88,5 @@ loader().then((_monaco) => {
   ipcRenderer.on('new-file', newFile)
   ipcRenderer.on('save-file', () => saveFile())
   ipcRenderer.on('save-file-as', saveFileAs)
+  ipcRenderer.on('print', print)
  })
