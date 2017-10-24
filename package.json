@@ -46,9 +46,12 @@
           "rpm"
         ]
       },
-      "electronPackagerConfig": {},
+      "electronPackagerConfig": {
+        "name": "Editor",
+        "icon": "./resources/icon"
+      },
       "electronWinstallerConfig": {
-        "name": ""
+        "name": "Editor"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
