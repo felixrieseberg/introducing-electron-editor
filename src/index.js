@@ -5,14 +5,30 @@ const { createMenu } = require('./menu.js')
 
 let mainWindow
 
+function getWindowCoordinates() {
+  const { screen } = require('electron')
+  const screens = screen.getAllDisplays()
+  const cursorPosition = screen.getCursorScreenPoint()
+
+  console.log(`We have ${screens.length} screens!`)
+  console.log(screens)
+
+  const matchingScreen = screen.getDisplayNearestPoint(cursorPosition)
+  console.log(`Mouse cursor is currently on screen:`, matchingScreen)
+
+  return cursorPosition
+}
+
 app.on('ready', () => {
   console.log('Application is ready!')
 
   const appUrl = path.join(__dirname, 'index.html')
+  const { x, y } = getWindowCoordinates()
 
   mainWindow = new BrowserWindow({
     acceptFirstMouse: true,
-    show: false
+    show: false,
+    x, y
   })
 
   mainWindow.loadURL(`file://${appUrl}`)
