@@ -1,10 +1,17 @@
 const { Menu, app, BrowserWindow, dialog } = require('electron')
+const { showDevDocs } = require('./devdocs')
 
 function createMenu() {
   const template = [
     {
       label: 'Code Editor',
       submenu: [
+        {
+          label: 'Show DevDocs',
+          click() {
+            showDevDocs()
+          }
+        },
         {
           label: 'Quit',
           accelerator: 'CmdOrCtrl+Q',
