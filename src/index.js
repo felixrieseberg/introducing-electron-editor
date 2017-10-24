@@ -43,3 +43,7 @@ app.on('ready', () => {
 
   createMenu()
 })
+
+app.on('window-all-closed', () => {
+  app.quit()
+})
