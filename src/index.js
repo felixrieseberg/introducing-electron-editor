@@ -2,6 +2,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const { createMenu } = require('./menu.js')
+const { setupUpdater } = require('./updater.js')
 
 let mainWindow
 
@@ -42,6 +43,8 @@ app.on('ready', () => {
   })
 
   createMenu()
+  // If this was a real app, you could use a real update server
+  // setupUpdater()
 })
 
 app.on('window-all-closed', () => {
