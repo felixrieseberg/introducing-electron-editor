@@ -48,10 +48,15 @@
       },
       "electronPackagerConfig": {
         "name": "Editor",
-        "icon": "./resources/icon"
+        "icon": "./resources/icon",
+        "osxSign": {
+          "identity": "A123567"
+        }
       },
       "electronWinstallerConfig": {
-        "name": "Editor"
+        "name": "Editor",
+        "certificateFile": "/path/to/your/certificate.pfx",
+        "certificatePassword": "your-cool-password"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
